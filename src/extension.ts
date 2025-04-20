@@ -8,6 +8,50 @@ export async function activate(context: vscode.ExtensionContext) {
   // Get API key from settings or environment
   let apiKey = process.env.API_KEY;
   
+  // Register command to set API key first
+  let setApiKeyCommand = vscode.commands.registerCommand('extension.setGroqApiKey', async () => {
+    // Create a new webview panel
+    const panel = vscode.window.createWebviewPanel(
+      'setApiKey',
+      'Set Groq API Key',
+      vscode.ViewColumn.One,
+      {
+        enableScripts: true,
+        retainContextWhenHidden: true // This keeps the panel state when switching tabs
+      }
+    );
+
+    // Get the current API key if it exists
+    const currentApiKey = context.globalState.get<string>('groqApiKey') || '';
+
+    // Set the HTML content
+    panel.webview.html = getWebviewContent(currentApiKey);
+
+    // Handle messages from the webview
+    panel.webview.onDidReceiveMessage(
+      async message => {
+        switch (message.command) {
+          case 'saveApiKey':
+            if (message.apiKey) {
+              apiKey = message.apiKey;
+              context.globalState.update('groqApiKey', apiKey);
+              vscode.window.showInformationMessage('API key has been saved.');
+              panel.dispose();
+            }
+            break;
+          case 'cancel':
+            panel.dispose();
+            break;
+        }
+      },
+      undefined,
+      context.subscriptions
+    );
+  });
+
+  // Add the command to subscriptions immediately
+  context.subscriptions.push(setApiKeyCommand);
+  
   // Create a status bar item
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   statusBarItem.text = "$(key) Set Groq API Key";
@@ -17,22 +61,105 @@ export async function activate(context: vscode.ExtensionContext) {
   
   // If no API key, prompt user to enter it
   if (!apiKey) {
-    const input = await vscode.window.showInputBox({
-      prompt: 'Please enter your Groq API key',
-      placeHolder: 'gsk_xxxxxxxx',
-      password: true
-    });
-
-    if (input) {
-      apiKey = input;
-      // Store the API key in extension's global state
-      context.globalState.update('groqApiKey', apiKey);
-    } else {
-      vscode.window.showErrorMessage('API key is required for the Error Explainer extension to work.');
-      return;
+    try {
+      // Try to get API key from global state
+      apiKey = context.globalState.get<string>('groqApiKey');
+      
+      if (!apiKey) {
+        // If still no API key, show the webview panel
+        vscode.commands.executeCommand('extension.setGroqApiKey');
+      }
+    } catch (error) {
+      console.error('Error checking for API key:', error);
+      vscode.window.showErrorMessage('Error checking for API key. Please try setting it again.');
     }
   }
 
+  // Helper function to get webview content
+  function getWebviewContent(currentApiKey: string) {
+    return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                padding: 20px;
+                font-family: var(--vscode-font-family);
+                color: var(--vscode-editor-foreground);
+                background-color: var(--vscode-editor-background);
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .input-group {
+                margin-bottom: 20px;
+            }
+            input {
+                width: 100%;
+                padding: 8px;
+                margin: 8px 0;
+                background-color: var(--vscode-input-background);
+                color: var(--vscode-input-foreground);
+                border: 1px solid var(--vscode-input-border);
+            }
+            .button-group {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+            }
+            button {
+                padding: 8px 16px;
+                border: none;
+                cursor: pointer;
+                background-color: var(--vscode-button-background);
+                color: var(--vscode-button-foreground);
+            }
+            button:hover {
+                background-color: var(--vscode-button-hoverBackground);
+            }
+            .cancel-button {
+                background-color: var(--vscode-button-secondaryBackground);
+            }
+            .cancel-button:hover {
+                background-color: var(--vscode-button-secondaryHoverBackground);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="input-group">
+                <label for="apiKey">Enter your Groq API key:</label>
+                <input type="password" id="apiKey" value="${currentApiKey}" placeholder="gsk_xxxxxxxx">
+            </div>
+            <div class="button-group">
+                <button class="cancel-button" onclick="cancel()">Cancel</button>
+                <button onclick="saveApiKey()">Save</button>
+            </div>
+        </div>
+        <script>
+            const vscode = acquireVsCodeApi();
+            
+            function saveApiKey() {
+                const apiKey = document.getElementById('apiKey').value;
+                vscode.postMessage({
+                    command: 'saveApiKey',
+                    apiKey: apiKey
+                });
+            }
+            
+            function cancel() {
+                vscode.postMessage({
+                    command: 'cancel'
+                });
+            }
+        </script>
+    </body>
+    </html>`;
+  }
+
+  // Register the explain error command
   let disposable = vscode.commands.registerCommand('extension.explainError', async () => {
     // Get API key from global state if not in environment
     const storedApiKey = context.globalState.get<string>('groqApiKey') || '';
@@ -70,21 +197,6 @@ export async function activate(context: vscode.ExtensionContext) {
       console.error('Error fetching explanation:', error);
       const errorMessage = error.message || 'Unknown error occurred';
       vscode.window.showErrorMessage(`Failed to fetch explanation: ${errorMessage}`);
-    }
-  });
-
-  // Register command to set API key
-  let setApiKeyCommand = vscode.commands.registerCommand('extension.setGroqApiKey', async () => {
-    const input = await vscode.window.showInputBox({
-      prompt: 'Enter your Groq API key',
-      placeHolder: 'gsk_xxxxxxxx',
-      password: true
-    });
-
-    if (input) {
-      apiKey = input;
-      context.globalState.update('groqApiKey', apiKey);
-      vscode.window.showInformationMessage('API key has been saved.');
     }
   });
 
@@ -134,7 +246,6 @@ export async function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(disposable);
-  context.subscriptions.push(setApiKeyCommand);
   context.subscriptions.push(setEnvApiKeyCommand);
 }
 
