@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 export async function activate(context: vscode.ExtensionContext) {
   console.log('✅ Spilot Extension is now active!');
