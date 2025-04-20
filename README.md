@@ -1,51 +1,65 @@
-This is the README for your extension "error-explainer". After writing up a brief description, we recommend including the following sections.
+# Error Explainer
+
+A VS Code extension that helps you understand error messages using AI-powered explanations.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- Select any error message and get an AI-powered explanation
+- Right-click context menu integration
+- Powered by Groq AI
+- Simple and intuitive interface
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code 1.99.0 or higher
+- A Groq API key
+
+## Installation
+
+1. Download the .vsix file
+2. In VS Code, go to Extensions (Ctrl+Shift+X)
+3. Click the "..." menu at the top of the Extensions view
+4. Select "Install from VSIX..."
+5. Choose the downloaded .vsix file
+
+## Usage
+
+1. Open any file with an error message
+2. Select the error message text
+3. Right-click and select "Explain Error"
+4. View the AI-generated explanation
+
+## Configuration
+
+1. Create a `.env` file in your workspace
+2. Add your Groq API key:
+   ```
+   API_KEY=your_groq_api_key_here
+   ```
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension contributes the following commands:
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+* `extension.explainError`: Explain the selected error message
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- None at the moment
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+Initial release of Error Explainer
 
-Initial release of ...
+## Contributing
 
-### 1.0.1
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Fixed issue #.
+## License
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
+This extension is licensed under the MIT License.
 
 ## Following extension guidelines
 
