@@ -1,5 +1,5 @@
 {
-  "name": "ai-code-assistant",
+  "name": "spilot",
   "displayName": "Spilot",
   "description": "AI-powered code assistant with suggestions, refactoring, and explanations",
   "version": "0.0.1",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Smit1963/shubham-extension.git"
+    "url": "https://github.com/Smit1963/Spilot.git"
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -28,17 +28,17 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "ai-code-assistant",
+          "id": "spilot",
           "title": "Spilot",
           "icon": "images/icon.svg"
         }
       ]
     },
     "views": {
-      "ai-code-assistant": [
+      "spilot": [
         {
           "type": "webview",
-          "id": "aiCodeAssistant",
+          "id": "spilotAssistant",
           "name": "Spilot Assistant"
         }
       ]

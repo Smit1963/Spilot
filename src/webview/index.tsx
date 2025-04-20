@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ChatInterface } from '../components/ChatInterface';
+import ChatInterface from '../components/ChatInterface';
 
 declare global {
   interface Window {
