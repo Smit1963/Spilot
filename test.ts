@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
-const fetch = (...args: Parameters<typeof import('node-fetch')['default']>) =>
-  import('node-fetch').then(mod => mod.default(...args));
+import fetch from 'node-fetch';
 
 dotenv.config();  // Load .env file
 

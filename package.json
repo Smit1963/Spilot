@@ -1,9 +1,9 @@
 {
-  "name": "error-explainer",
-  "displayName": "Error Explainer",
-  "description": "A VS Code extension to explain error messages clearly using AI.",
+  "name": "ai-code-assistant",
+  "displayName": "Spilot",
+  "description": "AI-powered code assistant with suggestions, refactoring, and explanations",
   "version": "0.0.1",
-  "publisher": "error-explainer",
+  "publisher": "spilot",
   "private": false,
   "license": "MIT",
   "repository": {
@@ -11,68 +11,127 @@
     "url": "https://github.com/Smit1963/shubham-extension.git"
   },
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
   ],
   "keywords": [
-    "error",
-    "explainer",
     "ai",
-    "groq"
+    "code-assistant",
+    "copilot",
+    "spilot"
   ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ai-code-assistant",
+          "title": "Spilot",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ai-code-assistant": [
+        {
+          "type": "webview",
+          "id": "aiCodeAssistant",
+          "name": "Spilot Assistant"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "extension.explainError",
-        "title": "Explain Error"
-      },
-      {
         "command": "extension.setGroqApiKey",
-        "title": "Error Explainer: Set API Key"
+        "title": "Spilot: Set API Key"
       },
       {
-        "command": "extension.setEnvApiKey",
-        "title": "Error Explainer: Set API Key in .env"
+        "command": "extension.suggestCode",
+        "title": "Spilot: Suggest Code Improvements"
+      },
+      {
+        "command": "extension.refactorCode",
+        "title": "Spilot: Refactor Code"
+      },
+      {
+        "command": "extension.completeCode",
+        "title": "Spilot: Complete Code"
+      },
+      {
+        "command": "extension.explainCode",
+        "title": "Spilot: Explain Code"
+      },
+      {
+        "command": "extension.explainError",
+        "title": "Spilot: Explain Error"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "extension.explainError",
+          "command": "extension.suggestCode",
+          "when": "editorHasSelection",
+          "group": "Spilot@1"
+        },
+        {
+          "command": "extension.refactorCode",
+          "when": "editorHasSelection",
+          "group": "Spilot@2"
+        },
+        {
+          "command": "extension.completeCode",
           "when": "editorTextFocus",
-          "group": "navigation"
+          "group": "Spilot@3"
+        },
+        {
+          "command": "extension.explainCode",
+          "when": "editorHasSelection",
+          "group": "Spilot@4"
+        },
+        {
+          "command": "extension.explainError",
+          "when": "editorHasSelection",
+          "group": "Spilot@5"
         }
       ]
     }
   },
   "scripts": {
+    "build": "webpack --mode production",
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "vscode-test",
-    "package": "vsce package"
+    "dev": "webpack --mode development"
   },
   "devDependencies": {
-    "@types/mocha": "^9.1.0",
-    "@types/node": "^18.11.9",
-    "@types/node-fetch": "^2.6.4",
-    "@types/vscode": "^1.96.0",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
     "@vscode/test-cli": "^0.0.4",
-    "@vscode/test-electron": "^2.1.3",
-    "eslint": "^8.26.0",
-    "mocha": "^9.2.0",
-    "typescript": "^4.8.4"
+    "@vscode/test-electron": "^2.3.8",
+    "css-loader": "^6.8.1",
+    "eslint": "^8.56.0",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
                                                                                                                 

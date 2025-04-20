@@ -1,22 +1,24 @@
 {
 	"compilerOptions": {
-		"module": "NodeNext",
-		"target": "ESNext",
-		"esModuleInterop": true,
-		"outDir": "out",
-		"lib": [
-			"ES2022",
-			"DOM"
-		],
-		"sourceMap": true,
-		"rootDir": "src",
+		"target": "ES2020",
+		"module": "commonjs",
+		"lib": ["ES2020", "DOM"],
+		"jsx": "react",
 		"strict": true,   /* enable all strict type-checking options */
-		"types": ["node", "vscode", "mocha"],
+		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
+		"outDir": "./out",
+		"rootDir": "./src",
+		"sourceMap": true,
 		"resolveJsonModule": true,
-		"moduleResolution": "NodeNext",
+		"moduleResolution": "node",
+		"types": ["node", "vscode", "react", "react-dom"],
 		/* Additional Checks */
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
 		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
@@ -26,6 +28,6 @@
 	],
 	"exclude": [
 		"node_modules",
-		".vscode-test"
+		"out"
 	]
 }
