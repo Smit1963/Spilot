@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Error Explainer
 
 A VS Code extension that helps you understand error messages using AI-powered explanations.
@@ -81,3 +82,6 @@ You can author your README using Visual Studio Code. Here are some useful editor
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
+=======
+# Spilot
+>>>>>>> 12049240a46948bcb5e41f58813db36d2943ad2c
