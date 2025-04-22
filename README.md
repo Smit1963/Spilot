@@ -1,87 +1,52 @@
-<<<<<<< HEAD
-# Error Explainer
+# Spilot
 
-A VS Code extension that helps you understand error messages using AI-powered explanations.
+Spilot is a Visual Studio Code extension designed to enhance your coding experience by providing features such as code improvement, refactoring, completion, and explanations for both code and errors. It integrates seamlessly into the VS Code environment, making it easy to access powerful coding tools.
 
 ## Features
 
-- Select any error message and get an AI-powered explanation
-- Right-click context menu integration
-- Powered by Groq AI
-- Simple and intuitive interface
+- **Code Improvement**: Get suggestions to enhance your code quality.
+- **Code Refactor**: Automatically refactor your code for better readability and performance.
+- **Code Completion**: Receive intelligent code completion suggestions as you type.
+- **Explain Code**: Understand your code better with detailed explanations.
+- **Explain Error**: Get AI-generated explanations for error messages.
+- **Accept/Reject Button**: Easily accept or reject suggestions provided by the extension.
 
 ## Requirements
 
-- VS Code 1.99.0 or higher
-- A Groq API key
+- Visual Studio Code version 1.99.0 or higher.
+- A valid Groq API key for accessing AI features.
 
 ## Installation
 
-1. Download the .vsix file
-2. In VS Code, go to Extensions (Ctrl+Shift+X)
-3. Click the "..." menu at the top of the Extensions view
-4. Select "Install from VSIX..."
-5. Choose the downloaded .vsix file
+To install the Spilot extension, follow these steps:
+
+1. Download the `.vsix` file from the releases section of the repository.
+2. Open Visual Studio Code and navigate to the Extensions view (Ctrl+Shift+X).
+3. Click the "..." menu at the top of the Extensions view.
+4. Select "Install from VSIX...".
+5. Choose the downloaded `.vsix` file to complete the installation.
 
 ## Usage
 
-1. Open any file with an error message
-2. Select the error message text
-3. Right-click and select "Explain Error"
-4. View the AI-generated explanation
+1. Open the Command Palette in VS Code (Ctrl+Shift+P).
+2. Search for "Spilot" to access the extension features.
+3. Set your unique Groq API key for individual user access.
+4. Select a code snippet in your editor.
+5. Right-click to access the features mentioned above from the context menu.
 
-## Configuration
+## Features in progress
 
-1. Create a `.env` file in your workspace
-2. Add your Groq API key:
-   ```
-   API_KEY=your_groq_api_key_here
-   ```
-
-## Extension Settings
-
-This extension contributes the following commands:
-
-* `extension.explainError`: Explain the selected error message
-
-## Known Issues
-
-- None at the moment
+- More Interactive UI Chatbox (Github.Copilot/Cursor)
+- n8n type workflow for visuals.
 
 ## Release Notes
 
 ### 0.0.1
 
-Initial release of Error Explainer
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
+- Initial release of the Spilot extension.
+- 
 ## License
 
 This extension is licensed under the MIT License.
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
-=======
-# Spilot
->>>>>>> 12049240a46948bcb5e41f58813db36d2943ad2c
+**Enjoy using Spilot!**
