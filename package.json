@@ -3,7 +3,7 @@
   "displayName": "Spilot",
   "description": "AI-powered code assistant with suggestions, refactoring, and explanations using Groq API",
   "version": "0.0.1",
-  "publisher": "spilot",
+  "publisher": "smitpatel",
   "private": false,
   "license": "MIT",
   "repository": {
