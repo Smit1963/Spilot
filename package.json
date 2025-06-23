@@ -1,7 +1,7 @@
 {
   "name": "spilot",
   "displayName": "Spilot",
-  "description": "AI-powered code assistant with suggestions, refactoring, and explanations",
+  "description": "AI-powered code assistant with suggestions, refactoring, and explanations using Groq API",
   "version": "0.0.1",
   "publisher": "spilot",
   "private": false,
@@ -22,7 +22,17 @@
     "copilot",
     "spilot"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:spilotAssistant",
+    "onCommand:spilot.showChat",
+    "onCommand:extension.setGroqApiKey",
+    "onCommand:extension.suggestCode",
+    "onCommand:extension.refactorCode",
+    "onCommand:extension.completeCode",
+    "onCommand:extension.explainCode",
+    "onCommand:extension.explainError",
+    "onCommand:extension.analyzeCode"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -30,7 +40,7 @@
         {
           "id": "spilot",
           "title": "Spilot",
-          "icon": "images/icon.svg"
+          "icon": "images/spilot_logo.svg"
         }
       ]
     },
@@ -45,8 +55,20 @@
     },
     "commands": [
       {
+        "command": "spilot.showChat",
+        "title": "Spilot: Show Chat",
+        "icon": {
+          "light": "images/spilot_logo.svg",
+          "dark": "images/spilot_logo.svg"
+        }
+      },
+      {
         "command": "extension.setGroqApiKey",
         "title": "Spilot: Set API Key"
+      },
+      {
+        "command": "extension.testConnectivity",
+        "title": "Spilot: Test Network Connectivity"
       },
       {
         "command": "extension.suggestCode",
@@ -67,9 +89,19 @@
       {
         "command": "extension.explainError",
         "title": "Spilot: Explain Error"
+      },
+      {
+        "command": "extension.analyzeCode",
+        "title": "Spilot: Analyze Code"
       }
     ],
     "menus": {
+      "editor/title": [
+        {
+          "command": "spilot.showChat",
+          "group": "navigation"
+        }
+      ],
       "editor/context": [
         {
           "command": "extension.suggestCode",
@@ -95,19 +127,19 @@
           "command": "extension.explainError",
           "when": "editorHasSelection",
           "group": "Spilot@5"
+        },
+        {
+          "command": "extension.analyzeCode",
+          "when": "editorTextFocus",
+          "group": "Spilot@6"
         }
       ]
     }
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "vscode:prepublish": "npm run compile",
-    "compile": "webpack --mode production",
-    "watch": "webpack --mode development --watch",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "vscode-test",
-    "dev": "webpack --mode development"
+    "compile": "webpack",
+    "build": "npm run compile && npm run build:webview",
+    "build:webview": "esbuild src/webview/index.tsx --bundle --outfile=dist/webview.js --minify --sourcemap --define:process.env.NODE_ENV=\\\"production\\\""
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
@@ -121,6 +153,7 @@
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.8",
     "css-loader": "^6.8.1",
+    "esbuild": "^0.20.0",
     "eslint": "^8.56.0",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
@@ -129,9 +162,12 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@types/react-icons": "^2.2.7",
     "dotenv": "^16.0.3",
     "node-fetch": "^2.7.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0"
   }
 }
