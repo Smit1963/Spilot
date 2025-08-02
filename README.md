@@ -111,8 +111,8 @@ Spilot: Provides comprehensive analysis including:
 - **SpilotSidebarProvider**: VS Code integration and UI
 
 ### Technology Stack
-- **Frontend**: TypeScript,HTMl
-- **Backend**: GO,Python
+- **Frontend**: TypeScript, JavaScript, HTML
+- **Backend**: GO, Python
 - **API**: Groq Cloud API
 - **Context Analysis**: Custom AST parsing and file indexing
 - **Error Detection**: Regex-based pattern matching with ML classification
@@ -187,4 +187,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Transform your VS Code into an intelligent coding environment with Spilot!** 🚀
+**Transform your IDE into an intelligent coding environment with Spilot!** 🚀
