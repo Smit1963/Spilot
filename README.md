@@ -1,4 +1,4 @@
-# Spilot - Advanced AI Coding Agent for VS Code
+# Spilot - AI Coding Agent for IDEs
 
 Spilot is a powerful, context-aware AI coding assistant that transforms your VS Code experience into an intelligent development environment. Think of it as your own personal Cursor + GitHub Copilot + Debugging Assistant, all rolled into one seamless extension.
 
