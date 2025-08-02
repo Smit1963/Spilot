@@ -65,24 +65,7 @@ For errors, Spilot:
 - Analyzes error type and severity
 - Provides targeted solutions with explanations
 - Suggests related files that might be affected
-
-## 🔧 Installation
-
-1. **Install the Extension**
-   ```bash
-   # Download from VS Code marketplace or build from source
-   ```
-
-2. **Set Up API Key**
-   - Get your API key from [Groq](https://console.groq.com/)
-   - Run `Spilot: Set API Key` command
-   - Enter your API key when prompted
-
-3. **Start Coding**
-   - Open any file in your project
-   - Use the commands or chat interface
-   - Enjoy intelligent, context-aware assistance!
-
+- 
 ## 💬 Usage Examples
 
 ### Error Analysis
@@ -128,8 +111,9 @@ Spilot: Provides comprehensive analysis including:
 - **SpilotSidebarProvider**: VS Code integration and UI
 
 ### Technology Stack
-- **Frontend**: VS Code Extension (TypeScript)
-- **AI Backend**: Groq Cloud API (Direct integration)
+- **Frontend**: TypeScript,HTMl
+- **Backend**: GO,Python
+- **API**: Groq Cloud API
 - **Context Analysis**: Custom AST parsing and file indexing
 - **Error Detection**: Regex-based pattern matching with ML classification
 
@@ -168,6 +152,24 @@ Spilot builds intelligent prompts that include:
 - **Advanced RAG**: Enhanced retrieval-augmented generation
 - **Performance Analytics**: Track coding efficiency and improvements
 - **Integration APIs**: Connect with other development tools
+
+## 🔧 Installation
+
+1. **Install the Extension**
+   ```bash
+   # Download from VS Code marketplace or build from source
+   ```
+
+2. **Set Up API Key**
+   - Get your API key from [Groq](https://console.groq.com/)
+   - Run `Spilot: Set API Key` command
+   - Enter your API key when prompted
+
+3. **Start Coding**
+   - Open any file in your project
+   - Use the commands or chat interface
+   - Enjoy intelligent, context-aware assistance!
+
 
 ## 🤝 Contributing
 
